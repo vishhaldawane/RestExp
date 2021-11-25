@@ -36,7 +36,11 @@ public class OrderTest {
 			System.out.println("------------------");
 			
 		}*/
-		Order theOrder = orderRepo.selectOrder(104); // http://ip:port/order/getOrder/103
+		
+		
+		/*
+		  Order theOrder = orderRepo.selectOrder(104); // http://ip:port/order/getOrder/103
+		 
 		System.out.println("Order Id      : "+theOrder.getOrderId());
 		System.out.println("Table Number  : "+theOrder.getTableNumber());
 		System.out.println("Order Date    : "+theOrder.getOrderDate());
@@ -45,7 +49,74 @@ public class OrderTest {
 		System.out.println("Food Quantity : "+theOrder.getQuantity());
 		System.out.println("Total Bill    : "+theOrder.getTotal());
 		System.out.println("------------------");
+		*/
+		/*
+		Order newOrder = new Order(106,LocalDateTime.now(),6,"Paneer Chilly",230,2); //POJO 
+
+		orderRepo.createOrder(newOrder);
 		
-		orderRepo.
+		List<Order> orderList = orderRepo.selectAllOrders();
+		
+		
+		// http://ip:port/order/getOrders
+		for(Order theOrder : orderList) {
+		
+			System.out.println("Order Id      : "+theOrder.getOrderId());
+			System.out.println("Table Number  : "+theOrder.getTableNumber());
+			System.out.println("Order Date    : "+theOrder.getOrderDate());
+			System.out.println("Food Item     : "+theOrder.getFoodItem());
+			System.out.println("Food Price    : "+theOrder.getPrice());
+			System.out.println("Food Quantity : "+theOrder.getQuantity());
+			System.out.println("Total Bill    : "+theOrder.getTotal());
+			System.out.println("------------------");
+			
+		}
+		*/
+
+		//103->Daal Rice",150,1
+		/*
+		 Order updatedOrder = new Order(103,LocalDateTime.now(),6,"Paneer Crispy",250,2); //POJO 
+	
+
+		orderRepo.updateOrder(updatedOrder);
+		
+		List<Order> orderList = orderRepo.selectAllOrders();
+		
+		
+		// http://ip:port/order/getOrders
+		for(Order theOrder : orderList) {
+		
+			System.out.println("Order Id      : "+theOrder.getOrderId());
+			System.out.println("Table Number  : "+theOrder.getTableNumber());
+			System.out.println("Order Date    : "+theOrder.getOrderDate());
+			System.out.println("Food Item     : "+theOrder.getFoodItem());
+			System.out.println("Food Price    : "+theOrder.getPrice());
+			System.out.println("Food Quantity : "+theOrder.getQuantity());
+			System.out.println("Total Bill    : "+theOrder.getTotal());
+			System.out.println("------------------");
+			
+		}
+		*/
+		
+		
+		orderRepo.deleteOrder(102);
+		
+		List<Order> orderList = orderRepo.selectAllOrders();
+		
+		
+		// http://ip:port/order/getOrders
+		for(Order theOrder : orderList) {
+		
+			System.out.println("Order Id      : "+theOrder.getOrderId());
+			System.out.println("Table Number  : "+theOrder.getTableNumber());
+			System.out.println("Order Date    : "+theOrder.getOrderDate());
+			System.out.println("Food Item     : "+theOrder.getFoodItem());
+			System.out.println("Food Price    : "+theOrder.getPrice());
+			System.out.println("Food Quantity : "+theOrder.getQuantity());
+			System.out.println("Total Bill    : "+theOrder.getTotal());
+			System.out.println("------------------");
+			
+		}
+		
 	}
 }
