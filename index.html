@@ -5,20 +5,52 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+	<script>
+		function alertMe() {
+			alert("Hello to java script1");
+			
+			var theSource = document.getElementById("source").value;
+			var theTarget = document.getElementById("target").value;
+			alert(theSource);
+			alert(theTarget);
+			
+			if(theSource == theTarget) {
+				alert("Source and target cannot be the same");
+			}
+			else {
+				alert("Searching the flights....");
+				
+			}
+	
+		}
+		
+		
+	</script>
+
 <h1> Welcome to Airline Reservation </h1>
-
-<hr>
-
-Search the flights <br>
-
-<hr>
+<hr>Search the flights <br><hr>
 
 <form action="foundflights.html">
-	Enter source city <input type=text name=source> <br>
-	Enter target city <input type=text name=target> <br>
-	Journey date  <input type=date name=doj> <br>
+	<table>
+	<tr>
+		<td>Enter source city </td> <td> <input type=text id="source" name=source required> </td id="sourcemsg"> <td> </td>
+	</tr>
 	
-	<input type=submit name=submit value="Search Flights"> <br>
+	<tr>
+		<td>Enter target city </td> <td><input type=text id="target" name=target required> </td id="targetmsg"> <td> </td>
+	</tr>
+	
+	<tr>
+		<td>Journey date  </td> <td><input type=date name=doj> </td> <td> </td>
+	</tr>
+	
+	<tr>
+	<td><input type=submit name=submit onclick="alertMe()" value="Search Flights"> <br>
+	</tr>
+	
+	</table>
+	
 </form>
 
 
