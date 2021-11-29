@@ -7,7 +7,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -84,14 +88,19 @@ public class OrderRepositoryImpl2 implements OrderRepository {
 		try {
 			PreparedStatement pst =conn.prepareStatement("insert into order12 values(?,?,?,?,?,?,?)");
 			pst.setInt(1, order.getOrderId());
+			pst.setInt(2,order.getTableNumber());
 			
 			LocalDateTime dateTime = order.getOrderDate();
-			java.sql.Date sqlDate = java.sql.Date.valueOf(dateTime.toLocalDate());
-			System.out.println("sql date "+sqlDate);
-			pst.setDate(2, sqlDate);
+			System.out.println("=>dateTime : "+dateTime);
 			
+			Timestamp timestamp =  Timestamp.valueOf(dateTime);
+			System.out.println("=>timestamp : "+timestamp);
 			
-			pst.setInt(3,order.getTableNumber());
+			java.sql.Date sqlDate = new java.sql.Date(timestamp.getTime());
+			System.out.println("=>sqlDate : "+sqlDate);
+			pst.setDate(3, sqlDate);
+		
+			
 			pst.setString(4,order.getFoodItem());
 			pst.setFloat(5, order.getPrice());
 			pst.setInt(6, order.getQuantity());
@@ -110,16 +119,50 @@ public class OrderRepositoryImpl2 implements OrderRepository {
 	public Order selectOrder(int orderId) { // SELECT SINGLE REPO
 		System.out.println("Searching the order...."+orderId);
 		
-		Order foundOrder = null;
+		Order orderObj = new Order(); //  blank order
 		
-		/*for(Order theOrder : orderList) {
-			if(theOrder.getOrderId() == orderId) {
-				foundOrder = theOrder;
-				break;
+		try {
+			
+			Statement st = conn.createStatement();
+			System.out.println("Statement is created...");
+			
+			//4. execute the query and retrieve the result if any
+			ResultSet rs	=	st.executeQuery("select * from order12 where orderid="+orderId);
+			System.out.println("Query is fired...and got the result....");
+	
+			
+		
+				if(rs.next()) {
+			
+				
+					orderObj.setOrderId(rs.getInt(1));
+					orderObj.setTableNumber(rs.getInt(2));
+				
+				
+					java.sql.Date date = rs.getDate(3); //grab the data from 3rd field and assing it to java.sql.Date
+					Timestamp timestamp = new Timestamp(date.getTime());//retrieve the date's milliseconds and convert to a timestamp
+					LocalDateTime tempLocalDate = timestamp.toLocalDateTime();
+					orderObj.setOrderDate(tempLocalDate);
+					
+					orderObj.setFoodItem(rs.getString(4));
+					orderObj.setPrice(rs.getInt(5));
+					orderObj.setQuantity(rs.getInt(6));
+					orderObj.setTotal(rs.getInt(7));
+			
+					System.out.println("Found the object.");
+					
+				}
+		
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		}*/
-		return foundOrder;
+				
+		return orderObj;
 	}
+	
+	
+	
 
 	@Override
 	public List<Order> selectAllOrders() { //SELECT ALL
@@ -128,33 +171,56 @@ public class OrderRepositoryImpl2 implements OrderRepository {
 	}
 
 	@Override
-	public void updateOrder(Order order) { //UPDATE
-		System.out.println("Updating the order...");
+	public void updateOrder(Order order) {  // CREATE REPO
+		System.out.println("updating the order....");
 		
-		/*for(int i=0;i<orderList.size();i++) {
-			Order tempOrder = orderList.get(i);
-			if(tempOrder.getOrderId() == order.getOrderId())
-			{
-				orderList.remove(i);
-				orderList.add(order);
-				break;
-			}
-		}*/
-
+		try {//tablenumber int,
+			 
+			PreparedStatement pst =conn.prepareStatement("update order12 set tablenumber=?, orderdate=?, fooditem=?, price=?, quantity=?, total=? where orderid=?");
+			pst.setInt(7, order.getOrderId());
+			pst.setInt(1,order.getTableNumber());
+			
+			LocalDateTime dateTime = order.getOrderDate();
+			System.out.println("=>dateTime : "+dateTime);
+			
+			Timestamp timestamp =  Timestamp.valueOf(dateTime);
+			System.out.println("=>timestamp : "+timestamp);
+			
+			java.sql.Date sqlDate = new java.sql.Date(timestamp.getTime());
+			System.out.println("=>sqlDate : "+sqlDate);
+			pst.setDate(2, sqlDate);
+		
+			
+			pst.setString(3,order.getFoodItem());
+			pst.setFloat(4, order.getPrice());
+			pst.setInt(5, order.getQuantity());
+			pst.setFloat(6, order.getPrice() * order.getQuantity());
+			pst.executeUpdate(); // will fire the insert query....
+			System.out.println("Order updated in the database.....");
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	@Override
 	public void deleteOrder(int orderId) { //DELETE
 		System.out.println("Deleting order....");
-	/*	for(int i=0;i<orderList.size();i++) {
-			Order tempOrder = orderList.get(i);
-			if(tempOrder.getOrderId() == orderId)
-			{
-				orderList.remove(i);
-				break;
-			}
-		}*/
-
+		try {//tablenumber int,
+			 
+			PreparedStatement pst =conn.prepareStatement("delete from order12 where orderid=?");
+			pst.setInt(1, orderId);
+			
+			pst.executeUpdate(); // will fire the insert query....
+			System.out.println("Order deleted from the database.....");
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }
