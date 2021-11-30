@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js">
+</script>	
+
+<script type="text/javascript">
+	$(document).ready ( 
+			function() { //1  //<-- annonymous1
+				
+				$("#hideIt").click(
+					function () //<-- annonymous2
+					{
+						$("p").hide(3500);
+					}
+				);
+			
+				$("#showIt").click(
+						function () //<-- annonymous2
+						{
+							$("p").show(1500);
+						}		
+				);
+				
+			} //end of 1
+	);
+	
+</script>
+</head>
+<body>
+
+
+<p> 
+	<b> Seven Habits of Highly Effective People </b> <br>
+	 
+	 <br>
+	 
+	1. Be Proactive <br>
+	2. Put First Thing First <br>
+	3. Begin with the end in mind  <br>
+	<br>
+	4. Think Win-Win<br>
+	<br>
+	5. Seek First To understand thenn to be understood<br>
+	6. Synergy<br>
+	7. Sharpen the SAW<br>
+
+</p>
+<button id="hideIt"> Hide this paragraph </button> <br>
+<button id="showIt"> Show the paragraph </button>
+
+</body>
+</html>
+
+
+	<!-- 		css manipulation
+			html manupulation
+			document object model - can be manipulated
+			json data conversion
+			ajax
+			animation and event handling
+	 -->
