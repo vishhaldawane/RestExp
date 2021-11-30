@@ -8,9 +8,17 @@
 </script>	
 
 <script type="text/javascript">
-	$(document).ready (
-			function() {
-				$("p").css("background-color","red");
+	$(document).ready ( //<-- executed only once when the page is loaded
+			function() { //annonymous function
+				/* $("p").css("background-color","red");
+				$("#para2").css("background-color","green");
+				$(".parac").css("background-color","red"); 
+				
+				$("*").css("background-color","red");
+				*/
+				
+				$("#para2,#para3").css("background-color","red");
+				
 			}
 	);
 	
@@ -19,9 +27,26 @@
 <body>
 
 
-<p> this is my paragraph number4 </p>
-<p> this is my paragraph number5 </p>
-<p> this is my paragraph number6 </p>
+<p> this is my paragraph number1 </p>
+<p id="para2"> this is my paragraph number2 </p>
+<p id="para3"> this is my paragraph number3 </p>
+<p id="para4"> this is my paragraph number4 </p>
+
+
+<div class="parac">
+	<h1 style="color:yellow"> this is my paragraph number3 </h1>	
+	<p> this is my paragraph number3 </p>
+	<a href="abc.html"> Click Here on abc.html</a>
+</div>
 
 </body>
 </html>
+
+
+	<!-- 		css manipulation
+			html manupulation
+			document object model - can be manipulated
+			json data conversion
+			ajax
+			animation and event handling
+	 -->
