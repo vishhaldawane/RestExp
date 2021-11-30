@@ -14,7 +14,7 @@
 					this.balance = balance;
 				}
 				withdraw(amount) {
-					console.log('Withdrawing....');
+					console.log('Withdrawing....BankAccount');
 					this.balance = this.balance - amount;
 				}
 				printBankAccount() {
@@ -24,10 +24,35 @@
 					
 				}
 		}
+		
+		class SavingsAccount extends BankAccount {
+			
+			constructor(acno,name,balance,rate) {
+				super(acno,name,balance);
+				this.rate = rate;
+			}
+			withdraw(amount) {
+				console.log('Withdrawing....SavingsAccount');
+				super.withdraw(amount);
+			}
+			printBankAccount() {
+				console.log(this.acno);
+				console.log(this.name);
+				console.log(this.balance);
+				console.log(this.rate);
+			}
+		}
+		
 		let bankAccount = new BankAccount(101,"Julie",5000);
 		bankAccount.printBankAccount();
 		bankAccount.withdraw(300);
 		bankAccount.printBankAccount();
+		
+		let savingsAccount = new SavingsAccount(102,"Jack",7000,8.4);
+		savingsAccount.printBankAccount();
+		savingsAccount.withdraw(300);
+		savingsAccount.printBankAccount();
+		
 	</script>
 </body>
 </html>
