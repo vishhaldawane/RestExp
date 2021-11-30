@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<script>
+		class BankAccount {
+			
+				constructor(acno,name,balance) {
+					this.acno = acno;
+					this.name = name;
+					this.balance = balance;
+				}
+				withdraw(amount) {
+					console.log('Withdrawing....');
+					this.balance = this.balance - amount;
+				}
+				printBankAccount() {
+					console.log(this.acno);
+					console.log(this.name);
+					console.log(this.balance);
+					
+				}
+		}
+		let bankAccount = new BankAccount(101,"Julie",5000);
+		bankAccount.printBankAccount();
+		bankAccount.withdraw(300);
+		bankAccount.printBankAccount();
+	</script>
+</body>
+</html>
