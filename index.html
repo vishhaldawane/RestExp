@@ -6,7 +6,7 @@
 </head>
 <body>
 
-	<script>
+	<script>		
 		function alertMe() {
 			alert("Hello to java script1");
 			
@@ -16,16 +16,18 @@
 			alert(theTarget);
 			
 			if(theSource == theTarget) {
-				alert("Source and target cannot be the same");
+				alert("Target cannot be the same as of the Source");
+				document.getElementById("targetmsg").innerHTML='Source and Target cannot be the same';
+				return false;
+				
 			}
 			else {
 				alert("Searching the flights....");
 				
 			}
-	
+			return true;
 		}
-		
-		
+	
 	</script>
 
 <h1> Welcome to Airline Reservation </h1>
@@ -34,11 +36,15 @@
 <form action="foundflights.html">
 	<table>
 	<tr>
-		<td>Enter source city </td> <td> <input type=text id="source" name=source required> </td id="sourcemsg"> <td> </td>
+		<td>Enter source city </td> 
+		<td> <input type=text id="source" name=source required> </td> 	
+		<td id="sourcemsg">[]</td>
 	</tr>
 	
 	<tr>
-		<td>Enter target city </td> <td><input type=text id="target" name=target required> </td id="targetmsg"> <td> </td>
+		<td>Enter target city </td> 
+		<td><input type=text id="target" name=target required> </td> 
+		<td id="targetmsg">  </td>
 	</tr>
 	
 	<tr>
@@ -46,7 +52,7 @@
 	</tr>
 	
 	<tr>
-	<td><input type=submit name=submit onclick="alertMe()" value="Search Flights"> <br>
+	<td><input type=submit name=submit onclick="return alertMe()" value="Search Flights"> <br>
 	</tr>
 	
 	</table>
